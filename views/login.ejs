@@ -1,0 +1,81 @@
+
+<%- include('partials/_header'); -%>
+
+<main>
+  <!-- section content begin -->
+  <div class="uk-section uk-padding-remove-vertical">
+      <div class="uk-container uk-container-expand">
+          <div class="uk-grid" data-uk-height-viewport="expand: true" data-height-expand="" style="min-height: 932px;">
+              <div class="uk-width-3-5@m uk-background-cover uk-background-center-right uk-visible@m uk-box-shadow-xlarge" style="background-image: url(img/finance-1.jpg);">
+              </div>
+              <div class="uk-width-expand@m uk-flex uk-flex-middle">
+                  <div class="uk-grid uk-flex-center">
+                      <div class="uk-width-3-5@m">
+                          <div id="users" class="in-padding-horizontal@s"> <p class="uk-text-lead uk-margin-top uk-margin-remove-bottom">Log into your account</p> <p class="uk-text-small uk-margin-remove-top uk-margin-medium-bottom">Don't have an account? <a href="/register" style="color: red;"><b>Register here</b></a></p> 
+
+                            <form method="POST" action="/login" id="loginForm" class="uk-grid uk-form">
+                            <div class="uk-margin-small uk-width-1-1 uk-inline">
+                              <span class="uk-form-icon uk-form-icon-flip fas fa-user fa-sm"></span>
+                               <input  type="text" name="email" value="email" id="email" placeholder="Email" required="required" class="uk-input uk-border-rounded" style="background-color: black;">
+                               <span  class="email error"></span>
+                              </div>
+                                <div class="uk-margin-small uk-width-1-1 uk-inline"><span class="uk-form-icon uk-form-icon-flip fas fa-lock fa-sm"></span>
+                                   <input  type="password" name="password" value="password" id="password" placeholder="Password" required="required" class="uk-input uk-border-rounded" style="background-color: black;">
+                                   <span  class="password error"></span>
+                                  </div> 
+                                   <div class="uk-margin-small uk-width-auto uk-text-small">
+                                    <label><input type="checkbox" class="uk-checkbox uk-border-rounded"> Remember me</label></div>
+
+                                     <div class="uk-margin-small uk-width-expand uk-text-small"><label class="uk-align-right"><a href="#" class="uk-link-reset"></a></label></div> 
+                                     <div class="uk-margin-small uk-width-1-1"><button type="submit" id="btnSignin" class="uk-button uk-width-1-1 uk-button-primary uk-border-rounded uk-float-left" style="background-color: red;">Sign In</button></div></form>
+
+                                    </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  
+  <!-- section content end -->
+</main>
+    
+            <script>
+              const form = document.querySelector('form');
+               const emailError = document.querySelector('.email.error');
+               const passwordError = document.querySelector('.password.error');
+               form.addEventListener('submit', async (e) => {
+                 e.preventDefault();
+                 // reset errors
+                 emailError.textContent = '';
+                 passwordError.textContent = '';
+                 // get values
+                 const email = form.email.value;
+                 const password = form.password.value;
+                 try {
+                   const res = await fetch('/login', { 
+                     method: 'POST', 
+                     body: JSON.stringify({ email, password }),
+                     headers: {'Content-Type': 'application/json'}
+                   });
+                   const data = await res.json();
+                   // console.log(data);
+                   if (data.errors) {
+                     emailError.textContent = data.errors.email;
+                     passwordError.textContent = data.errors.password;
+                   }
+                   if (data.user) {
+                     location.assign('/dashboard');
+                   }
+                 }
+                 catch (err) {
+                   console.log(err);
+                 }
+               });
+             
+             
+             </script>
+    
+    
+     <%- include('partials/_footer'); -%>
+    

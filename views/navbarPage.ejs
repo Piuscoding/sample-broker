@@ -1,0 +1,99 @@
+
+<%- include('partials/dashboardHeader')%>
+
+<section class="content">
+
+    <div class="d-flex justify-content-between  from-top ">
+        <div class="menu">
+            MENU
+        </div> 
+        <div id="google_translate_element"></div>
+    
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
+    </script>
+    
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        <div>
+            <a class="btn1" href="/logout">logout</a>
+        </div>
+    </div>
+    <div style="padding: 20px;"></div>
+    
+    <div class="d-flex justify-content-start ">
+        <a href="#"><a href="/account" class="ph">
+        <img src="assetss/img/pers.svg" /> </a>
+        <div class="sl">
+            <div class="name">
+            <%=user.fullname%></div>
+            <div class="email">
+            <%=user.email%></div>
+        </div>
+    </div>
+    
+    
+    <div style="padding: 10px;"> </div>
+    <div class="mycard " style="padding-top: 3%;">
+        <table>
+            <tr>
+                <td class="lsi">User Name:</td>
+                <td><%=user.fullname%></td>
+            </tr>
+            <tr>
+                <td class="lsi">Join Date:</td>
+                <td><%=user.createdAt%></td>
+            </tr>
+
+            <tr>
+                <td class="lsi">Kyc Status:</td>
+                            <td class="desc text-light"><span style="color:red;"><%=user.verifiedStatus%></span></td>
+                                                                    </td>
+            </tr>
+            <tr>
+                <td class="lsi">Account Type:</td>
+                <td><%=user.level%></td>
+            </tr>
+        </table>
+    </div>
+     
+    <div class="d-flex flex-column " style="padding-top: 3%;">
+        <a class="div-btn" href="/dashboard">
+            <span class="linkcss">Dashboard</span>
+        </a>
+            <a class="div-btn" href="/verify">
+            <span class="linkcss">Verify Account</span>
+        </a>
+             <a class="div-btn" href="/deposit">
+            <span class="linkcss">Deposit</span>
+        </a>
+        <a class="div-btn" href="/widthdraw">
+            <span class="linkcss">Withdrawal</span>
+        </a>
+        <!--<a class="div-btn" href="signal-package">
+            <span class="linkcss">Signal Subscribtion</span>
+        </a>-->
+        <a class="div-btn" href="/trading-live">
+            <span class="linkcss">Live Trades</span>
+        </a>
+        <a class="div-btn" href="/stock">
+            <span class="linkcss">Stocks Trade</span>
+        </a>
+        <a class="div-btn" href="/upgrade">
+            <span class="linkcss">Account Upgrade</span>
+        </a>
+        <a class="div-btn" href="/transcations">
+            <span class="linkcss">Transaction History</span>
+        </a>
+       
+    </div>
+    
+    <!-- <div class="d-flex justify-content-center f" style="margin-top: 3%;">Trade Tips LTD</div>
+    <div class="d-flex justify-content-center f">Copyrights 2023 TradeTips-Analysis All Rights Reserve</div>
+    </div> -->
+    
+    
+    </section>
+
+    <%- include('partials/dashboardFooter')%>
